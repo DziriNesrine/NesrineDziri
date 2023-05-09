@@ -1,0 +1,53 @@
+﻿@model IEnumerable<NesrineDziri.Models.Perfumery_Store>
+
+@{
+    ViewData["Title"] = "Perfumery_StoreAndTheirMakeUps";
+}
+
+<h1>Perfumery_StoreAndTheirMakeUps</h1>
+
+<p>
+    <a class="btn btn-primary" style="border-radius:10px" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Make Up Id
+            </th>
+            <th>
+                Make Up Name
+            </th>
+            <th>
+                Make Up Marque
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+                <td>
+                    @foreach (var m in item.MakeUps)
+                    {
+                        @Html.DisplayFor(modelItem => m.Nom)
+                        @Html.DisplayFor(modelItem => m.Marque)
+
+                        <br />
+                    }
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

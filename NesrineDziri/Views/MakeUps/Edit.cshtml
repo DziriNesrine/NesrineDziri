@@ -1,0 +1,65 @@
+﻿@model NesrineDziri.Models.MakeUp
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>MakeUp</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Nom" class="control-label"></label>
+                <input asp-for="Nom" class="form-control" />
+                <span asp-validation-for="Nom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Marque" class="control-label"></label>
+                @*<select asp-for="Marque" class="form-control"></select>*@
+                <select asp-for="Marque" asp-items="Html.GetEnumSelectList<Marque>()" class="form-control">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="Marque" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rating" class="control-label"></label>
+                <input asp-for="Rating" class="form-control" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarqueUrl" class="control-label"></label>
+                <input asp-for="MarqueUrl" class="form-control" />
+                <span asp-validation-for="MarqueUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Perfumery_StoreId" class="control-label"></label>
+                <select asp-for="Perfumery_StoreId" class="form-control" asp-items="ViewBag.Perfumery_StoreId"></select>
+                <span asp-validation-for="Perfumery_StoreId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="margin-top:10px">
+    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/custom-validation.js"></script>
+}

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<NesrineDziri.Models.MakeUp>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Make Up Table</h1>
+
+<p>
+    <a class="btn btn-primary" style="border-radius:10px" asp-action="Create">Add New</a>
+   <!--
+        <a class="btn btn-secondary" asp-action="MakeUpAndTheirPerfumery_Store">MakeUpAndTheirPerfumery_Store</a>
+    -->   
+</p>
+
+<form asp-controller="MakeUps" asp-action="SearchByTitle">
+    <p>
+        Name: <input type="text" name="s"/>
+        <input type="submit" value="Filter"  />
+    </p>
+</form>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marque)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MarqueUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Perfumery_Store)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @if (item.ImageUrl != null)
+                {
+                        <img src="@Url.Content(item.ImageUrl)" alt="Image" />
+                    }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marque)
+            </td>
+            <td>
+               @* @Html.DisplayFor(modelItem => item.MarqueUrl)*@
+                    <a href=@item.MarqueUrl target="_blank">@item.Nom</a>
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Perfumery_Store.Id)
+                </td>
+            <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-dark" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
